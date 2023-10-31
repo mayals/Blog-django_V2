@@ -1,0 +1,8 @@
+{% extends 'blog/base.html' %} {% block content %} {% load crispy_forms_tags %}
+
+<div class="border p-4 mb-5">
+    <legend class="border-bottom pb-1 mb-3">you are logout successfully.</legend>
+    you can <a href="{% url 'users:login_path' %}">login here</a>
+
+</div>
+{% endblock content %}

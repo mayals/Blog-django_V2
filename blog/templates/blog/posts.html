@@ -1,0 +1,87 @@
+{% extends 'blog/base.html' %} 
+{% block content %}
+
+    {% block title %} <h3>{{ title }}</h3> {% endblock title  %}
+   
+   
+
+    <!-- if messages ----- -->
+    {% if messages %} 
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">
+            {{message}}
+        </div>
+        {% endfor %} 
+    {% endif %}
+    <!--  end if messages ----- -->
+
+
+
+
+    <!-- if authenticated    start   -->
+    {% if request.user.is_authenticated %}
+    <div>
+        <a class="text-success float-right" data-toggle="tooltip" data-placement="top" title="Add New Post" href="{% url 'blog:post-create' %}">
+            <i class="far fa-plus-square fa-2x"></i>
+        </a>
+    </div>
+    {% endif %}
+    <!-- if authenticated  end   -->
+
+   <br>
+   <br>
+
+
+    <!-- if tag   start -->
+    {% if tag %}
+      <h4>Posts tagged with '{{ tag.name }}'</h4>
+    {% endif %}
+    <!-- if tag  end -->
+
+    <br>
+    <br>
+
+      <!--posts list start -->
+        <section class="border rounded p-1 mycolor">
+            {% for post in posts %}
+            <div class="border rounded  pt-3 pr-3 pl-3  color_w m-2">
+                <!--user  profile imsge  -->
+                <img class="img-fluid rounded-circle border m-2" style="width: 70px; height:70px;" src="{{post.p_author.profile.image.url}}" alt="author photo">
+                <!-- post  -->
+                <h4>
+                    <a class="text-info" href="{% url 'blog:post-detail'  post_id=post.id %}">
+                       {{ post.p_subject }}
+                    </a>
+                </h4>
+                <h4>
+                    <a class="text-info" href="{% url 'blog:post-detail' post.id %}">
+                       {{  post.p_body|safe  }}
+                    </a>
+                </h4>
+
+                <!-- date -->
+                by: <span class="text-info text-center">{{post.p_author}}</span><br>
+                <span class="text-secondary small">
+                Published: {{post.p_published_at|date:'d-m-Y'}} 
+                </span>
+
+                <br><br>
+
+                <!--  tags  -->
+                <!-- <p class="tags">Tags: {{ post.tags.all|join:", " }}</p> -->
+                <h6 class='text-secondary font-italic'><small>Tags:</small><h6>
+                <ul class='tags'>
+                    {% for tag in post.p_tags.all %}
+                        <a href="{% url 'blog:posts-by-tag' tag.slug %}" class="tag">
+                            {{ tag.name }}
+                        </a>
+                        {% if not forloop.last %}, {% endif %} 
+                    {% endfor %}
+                </ul>
+
+            </div>
+            {% endfor %}
+        </section>
+
+
+{% include 'blog/pagination.html' with page=posts %} {% endblock %}

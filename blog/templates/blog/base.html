@@ -1,0 +1,237 @@
+{% load static %}
+
+<!-- django-ckeditor start  -->
+<!-- https://pypi.org/project/django-ckeditor/#installation -->
+{% block extrahead %}
+<script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>
+{{ block.super }}
+{% endblock %}
+<!-- django-ckeditor end  -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- head start  -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="{% static 'css\bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css\fontawesome_all.css' %}" rel="stylesheet">
+    <link href="{% static 'css\main.css' %}" rel="stylesheet">
+</head>
+<!-- head end -->
+
+
+
+
+<!-- body start -->
+
+<body>
+    <!-- navbar start --------------------- -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+        <!-- logo start -->
+        <div class="navbar-brand rotate-n-15 h3">
+            <i class="far fa-comments fa-3x"></i>
+        </div>
+        <div class="navbar-brand mb-0 h1">Blog<sup>!</sup></div>
+        <!-- logo end -->
+        <!-- navbarSupportedContent -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+        </button>
+        <!--  -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog:posts' %}"><i class="far fa fa-home mt-2 "></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="far fa-address-card mt-2"></i> About us</a>
+                </li>
+                <!-- dropdown start -->
+                <li class="nav-item dropdown mt-1">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       Accounts
+                    </a> {% if request.user.is_authenticated %}
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="nav-item">
+                            <a class="my-nav-link" href="{% url 'blog:post-create' %}"><i class="far fa-plus-square mt-2 ml-2 mr-2"></i> Add New Post</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="my-nav-link" href="{% url 'users:myprofile' %}"><i class="far fa-user mt-2 ml-2 mr-2"></i> Personal Profile</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="my-nav-link" href="{% url 'users:logout' %}"><i class="fas fa-sign-out-alt mt-2 ml-2 mr-2"></i> Logout</a>
+                        </li>
+                    </ul>
+                    {% else %}
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="nav-item">
+                            <a class="my-nav-link" href="{% url 'users:register' %}"><i class="fas fa-user-plus mt-2 ml-2 mr-2"></i> SignUp</a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item">
+                            <a class="my-nav-link" href="{% url 'users:login' %}"><i class="fas fa-sign-in-alt mt-2 ml-2 mr-2"></i> Login</a>
+                        </li>
+                    </ul>
+                    {% endif %}
+                </li>
+                <!-- dropdown end -->
+            </ul>
+            
+            <form class="form-inline my-2 my-lg-0" action={% url 'blog:search-results' %}>
+                <input  name='src_subj' class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            
+
+            <span>   
+                <a class='btn btn-sm btn-outline-warning' href="{% url 'blog:advanced-search' %}" role="button">
+                    <i class="fas fa-search-plus"></i>
+                </a>
+            </span>
+        </div>
+    </nav>
+    <!--  navbar end  ----------->
+
+    {% if request.user.is_authenticated %}
+    <div class='float-right bg-warning p-1'>welcome {{ user.username}}</div>
+    {% else %}
+    <div class='float-right bg-warning p-1'>welcome vesitor</div>
+    {% endif %}
+    <!-- secion start  ---------------------->
+    <section class="container">
+        <!-- row start   -->
+        <div class="row mt-4">
+            <!-- column 1 start  -->
+            <div class="col-md-8">
+                {% block content %} {% endblock content %}
+            </div>
+            <!-- column 2 start  -->
+            <div class="col-md-4">
+                <!-- card 1 -->
+                <div class="card mb-3">
+                    <h3 class="card-header text-center bg-secondary text-light p-2">Total Posts</h3>
+                    <div class="card-body">
+                        <h5 class="card-title">Number of posts</h5>
+                        <p class="card-text"> posts.</p>
+                        <p><a href="{% url 'blog:post-feed' %}">Subscribe to my RSS feed</a></p>
+                    </div>
+                </div>
+
+                <!-- card 2 -->
+                <div class="card mb-3">
+                    <h3 class="card-header text-center bg-secondary text-light p-2">Last Posts</h3>
+                    <div class="card-body">
+                        <h5 class="card-title">Lastest Posts</h5>
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+
+                <!-- card 3 -->
+                <div class="card mb-3">
+                    <h3 class="card-header text-center bg-secondary text-light p-2">Most commented posts</h3>
+                    <div class="card-body">
+                        <h5 class="card-title">Most commented posts</h5>
+                        <p class="card-text">
+                            
+                            <ul>
+                                {% for post in most_commented_posts %}
+                                <li>
+                                    <a href="{% url 'blog:post-detail' post.id %}">{{ post.p_subject}}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                    </div>
+                    </p>
+                </div>
+
+                <!-- card 4 -->
+                <div class="card mb-3">
+                    <h3 class="card-header text-center bg-secondary text-light p-2">Last Comments</h3>
+                    <div class="card-body">
+                        <h5 class="card-title">Lastest Comments</h5>
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+
+                <!-- card 5 -->
+                <div class="card mb-3">
+                    <h3 class="card-header text-center bg-secondary text-light p-2">All Tags</h3>
+                    <div class="card-body">
+                        <h5 class="card-title">All Tags</h5>
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+            <!-- columins end -->
+        </div>
+        <!-- row end --  -->
+    </section>
+    <!-- secion end  ---------------------->
+    <!-- footer start  -->
+    <footer class="bg-dark">
+        <div class="container-fluid">
+            <div class='row'>
+                <div class="col-md-4 text-center">
+                    <div class="card-group">
+                        <div class="card m-3">
+                            <h3 class="card-title text-center border-bottom p-2 m-3">about me</h3>
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <i class="far fa-address-card fa-3x"></i>
+                                </div>
+                                <p>
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card m-3">
+                        <h3 class="card-title text-center border-bottom p-2 m-3">Important sites</h3>
+                        <div class="card-body">
+                            <ul>
+                                <li><a class="text-dark" href="https://www.python.org/doc/">Python</a></li>
+                                <li><a class="text-dark" href="https://docs.djangoproject.com/en/2.2/">Django</a></li>
+                                <li><a class="text-dark" href="https://developer.mozilla.org/">MDN</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="card m-3">
+                        <h3 class="card-title text-center border-bottom p-2 m-3">Social media </h3>
+                        <h4 class="card-body text-center">
+                            <a class="text-secondary" href=""><i class="fab fa-facebook"></i></a>
+                            <a class="text-secondary" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="text-secondary" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="text-secondary" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="text-secondary" href=""><i class="fab fa-telegram"></i></a>
+                            <a class="text-secondary" href=""><i class="fab fa-linkedin"></i></a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="col-md text-center">
+        <small class="text-light">&copy; All rights reserved {% now 'Y' %}</small>
+    </div>
+    </footer>
+    <!-- footer end  -->
+    <!-- scripts js -->
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/fontawesome_all.js' %}"></script>
+    
+    <!--https://pypi.org/project/django-ckeditor/#installation--> 
+    {% load static %}
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+</body>
+
+</html>

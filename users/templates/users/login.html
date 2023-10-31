@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %} {% block content %}
+<div class="border p-4 mb-5">
+    <legend class="border-bottom pb-1 mb-3">login</legend>
+
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{message.tags}}">
+        {{message}}
+    </div>
+    {% endfor %} {% endif %}
+
+
+    <form method="POST" novalidate>
+
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">username</label>
+            <input type="text" name="username" id="username" class="form-control" placeholder="insert username here ..">
+        </div>
+        <div class="form-group">
+            <label for="password">password</label>
+            <input type="password" name="password" id="password" class="form-control" placeholder="insert password here ..">
+        </div>
+        <input class="btn btn-secondary mt-4" type="submit" value="login here">
+    </form>
+
+    <div class="border-top mt-4 pt-2">
+        <small>if you dont have account<a href="{% url 'users:register' %}">register here</a></small>
+    </div>
+
+</div>
+{% endblock content %}

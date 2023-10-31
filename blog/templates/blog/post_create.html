@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %} {% block content %} {% load crispy_forms_tags %}
+
+<legend class="border-bottom pb-1 mb-3">New post</legend><br>
+<div class="border rounded border-secondary p-3  mt-2 mb-5  border_comment">
+    <form method="POST" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {{form.media }}
+        {{form.as_p}}
+        <input class="btn btn-secondary mt-4" type="submit" value="publish">
+    </form>
+</div>
+{% endblock content %}

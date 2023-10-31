@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %} 
+{% block content %} 
+{% load crispy_forms_tags %}
+
+<div class="border p-4 mb-5">
+    <legend class="border-bottom pb-1 mb-3">Register</legend>
+    <form method="POST" novalidate>
+        {% csrf_token %} {{form}}
+        <input class="btn btn-secondary mt-4" type="submit" value="register">
+    </form>
+    <div class="border-top mt-4 pt-2">
+        <small>if you have account<a href="{% url 'users:login' %}">login</a></small>
+    </div>
+</div>
+{% endblock content %}

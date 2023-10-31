@@ -1,0 +1,125 @@
+                /* body{
+     background-color:whitesmoke;
+} */
+                /* .nav-link{
+     color: rgb(233, 212, 22);
+
+} */
+                /* .date{
+    color:gray;
+} */
+                
+.mycolor {
+    background-color: #13D6E4!important;
+}
+
+.color_w {
+    background-color: white!important;
+}
+
+.border_comment {
+    border-color: #13D6E4!important;
+}
+
+body {
+    padding-top: 150px;
+}
+/* my color */
+
+.color_p {
+    background-color: #dc143c;
+    color: white;
+}
+/* ---------tag start ----------------------------------------------- */
+
+.tags {
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.tags li {
+    float: left;
+}
+
+.tag {
+    background: #eee;
+    border-radius: 3px 0 0 3px;
+    color: #999;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 20px 0 23px;
+    position: relative;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+    -webkit-transition: color 0.2s;
+}
+
+.tag::before {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+    content: '';
+    height: 6px;
+    left: 10px;
+    position: absolute;
+    width: 6px;
+    top: 10px;
+}
+
+.tag::after {
+    background: #fff;
+    border-bottom: 13px solid transparent;
+    border-left: 10px solid #eee;
+    border-top: 13px solid transparent;
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.tag:hover {
+    background-color: crimson;
+    color: white;
+}
+
+.tag:hover::after {
+    border-left-color: crimson;
+}
+/* ---tag end --------------------------------------------- */
+/* dropdown navbar */
+
+a .my-nav-link {
+    color: rgb(35, 57, 129)important!;
+    padding-left: 2px;
+}
+/* -------------------------------------- */
+
+.my-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding-top: 0.5rem;
+    padding-right: 0px;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5px;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: rgb(33 37 41);
+    text-align: left;
+    list-style: none;
+    background-color: rgb(255 255 255);
+    background-clip: padding-box;
+    border: 1px solid rgb(0 0 0 / 15%);
+    border-radius: .25rem;
+}
+
+.rotate-n-15 {
+    transform: rotate(5deg);
+}
