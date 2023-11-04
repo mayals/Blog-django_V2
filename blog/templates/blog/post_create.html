@@ -2,7 +2,7 @@
 
 <legend class="border-bottom pb-1 mb-3">New post</legend><br>
 <div class="border rounded border-secondary p-3  mt-2 mb-5  border_comment">
-    <form method="POST" enctype="multipart/form-data" novalidate>
+    <form method="POST" novalidate>
         {% csrf_token %}
         {{form.media }}
         {{form.as_p}}

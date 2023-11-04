@@ -48,16 +48,16 @@
                 <!--user  profile imsge  -->
                 <img class="img-fluid rounded-circle border m-2" style="width: 70px; height:70px;" src="{{post.p_author.profile.image.url}}" alt="author photo">
                 <!-- post  -->
-                <h4>
+                <h5>
                     <a class="text-info" href="{% url 'blog:post-detail'  post_id=post.id %}">
                        {{ post.p_subject }}
                     </a>
-                </h4>
-                <h4>
-                    <a class="text-info" href="{% url 'blog:post-detail' post.id %}">
-                       {{  post.p_body|safe  }}
-                    </a>
-                </h4>
+                </h5>
+              
+                    <pclass="text-info" href="{% url 'blog:post-detail' post.id %}"
+                    >{{  post.p_body|safe  }}</p>
+                  
+                
 
                 <!-- date -->
                 by: <span class="text-info text-center">{{post.p_author}}</span><br>

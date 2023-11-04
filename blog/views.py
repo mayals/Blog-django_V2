@@ -244,7 +244,7 @@ class PostCreateView(LoginRequiredMixin, FormView):
         post           =  form.save(commit=False)
         post.p_author  =  self.request.user
         post.p_subject =  form.cleaned_data.get("p_subject")
-        post.p_body    =  form.cleaned_data.get("p_body") 
+        post.p_body    =  form.cleaned_data.get("p_body")  
         post.save() 
         p_tags         =  form.cleaned_data.get("p_tags")
         post.p_tags.set(p_tags)    # use set() with many to many

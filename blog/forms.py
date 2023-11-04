@@ -9,8 +9,12 @@ class PostCreateForm(forms.ModelForm):
     p_body    = forms.CharField(widget=CKEditorWidget())
 
     class Meta:
-        model  = Post
-        fields = ['p_subject', 'p_body','p_tags']
+        model   = Post
+        fields  = ['p_subject', 'p_body','p_tags']
+        # widgets = {
+        #     'p_subject' : forms.TextInput(attrs={'class':'form-control','placeholder':'Subject'}),
+        #     'p_body'    : RichTextFormField(confic_name='default'),
+        # }
 
 
 
