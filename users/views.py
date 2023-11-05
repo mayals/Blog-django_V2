@@ -117,7 +117,7 @@ def myprofile_update(request):
 # -----------------# My Porfile informations display # -----------------------------------------------#
 @login_required(login_url='users:login')
 def myprofile(request):
-    my_posts  = Post.objects.all().filter(P_author=request.user).filter(P_status='published')
+    my_posts  = Post.objects.all().filter(p_author=request.user).filter(p_status='p')
     
     # ----- pagination -----
     paginator = Paginator(my_posts, 10)

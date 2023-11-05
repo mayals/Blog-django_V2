@@ -274,7 +274,7 @@ CKEDITOR_FORCE_JPEG_COMPRESSION = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-\
+
 
 
 
@@ -290,6 +290,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # crispy_forms setting :
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
+# https://django-crispy-forms.readthedocs.io/en/latest/filters.html
+CRISPY_TEMPLATE_PACK = 'uni_form'
 
 
