@@ -40,7 +40,7 @@ def posts_view(request,tag_slug=None):
 
     # ----context for post_all_show ---
     context = {
-        'title': 'All posts',
+        'title': 'Posts',
         'posts': posts,
         'page' : page,
         'tag'  : tag,

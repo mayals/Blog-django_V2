@@ -252,6 +252,21 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+# https://baronchibuike.medium.com/hey-i-will-be-showing-you-how-you-can-implement-ckeditor-to-your-django-project-in-less-than-5mins-6fb66deb8f4b
+CKEDITOR_UPLOAD_PATH = "uploads"
+
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_THUMBNAIL_SIZE = (300, 300)
+ # CKEDITOR_THUMBNAIL_SIZE = (300, 300)
+
+CKEDITOR_IMAGE_QUALITY = 40
+
+CKEDITOR_BROWSE_SHOW_DIRS = True
+
+CKEDITOR_ALLOW_NONIMAGE_FILES = True
+
+CKEDITOR_FORCE_JPEG_COMPRESSION = True
 
 
 

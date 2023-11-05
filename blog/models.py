@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.urls import reverse
 from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
-
+#from ckeditor_uploader.fields import RichTextUploadingField
 
 
 # -----------------# Post # -----------------------------------------------#
@@ -18,6 +18,7 @@ class Post(models.Model):
     p_subject      = models.CharField(max_length=50, null=True , blank=False)
     p_slug         = models.SlugField(null=True, blank=True, max_length=250)
     p_body         = RichTextField()
+    #p_body         = RichTextUploadingField()
     p_status       = models.CharField(max_length=10, choices=STATUS_CHOICES, default='p')
     p_created_at   = models.DateTimeField(default=timezone.now, null=True)
     p_published_at = models.DateTimeField( auto_now_add=True, auto_now=False, null=True)
