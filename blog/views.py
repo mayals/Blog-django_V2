@@ -64,7 +64,7 @@ def search_results(request):
     posts = None
     src_subj     = None
     src_body     = None
-    tit_sub      = None
+    tit_subj      = None
     tit_body     = None
 
     posts = Post.objects.all().filter(p_status='p')

@@ -1,0 +1,62 @@
+
+{% extends 'blog/base.html' %} {% block content %} 
+ 
+ 
+ 
+{% block title %}
+<h3>{{ title }}</h3>
+{% endblock title  %}
+
+
+
+<h4>Posts</h4>
+  {% if  tit_sub  %} 
+   <h5>{{ tit_sub }}</h5>
+       {% endif %}
+   {% if tit_body  %}
+       <h5>{{tit_body}}</h5>
+   {% endif %}
+
+
+
+
+<section class="border rounded p-1 mycolor">
+   {% for post in posts_result %}
+   <div class="border rounded  pt-3 pr-3 pl-3  color_w m-2">
+       <img class="img-fluid rounded-circle border m-2" style="width: 70px; height:70px;" src="{{post.P_author.profile.image.url}}" alt="author photo">
+
+
+       <!-- post  -->
+       <h4>
+           <a class="text-info" href="{% url 'blog:post-detail' post.id %}">
+       {{ post.P_subject }}
+   </a>
+       </h4>
+
+       <!-- date -->
+       by: <span class="text-info text-center">{{post.P_author}}</span><br>
+       <span class="text-secondary small">
+       Published: {{post.P_publish|date:'d-m-Y'}} 
+       </span>
+
+       <br><br>
+
+       <!--  tags  -->
+       <!-- <p class="tags">Tags: {{ post.tags.all|join:", " }}</p> -->
+       <h6 class='text-secondary font-italic'><small>Tags:</small>
+           <h6>
+               <ul class='tags'>
+                   {% for tag in post.tags.all %}
+                   <a href="{% url 'blog:post_list_by_tag' tag.slug %}" class="tag">
+       {{ tag.name }}
+   </a> {% if not forloop.last %}, {% endif %} {% endfor %}
+               </ul>
+
+   </div>
+   {% endfor %}
+</section>
+
+
+{% include 'blog/pagination.html' with page=posts %}
+
+{% endblock content  %}
